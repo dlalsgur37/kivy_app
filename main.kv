@@ -1,0 +1,539 @@
+#:kivy 2.0.0
+#:import Factory kivy.factory.Factory
+#:import Image kivy.core.image
+
+<DialogLabel>
+    size_hint_x: 0.7
+    font_name: './source/NanumBarunpenR.ttf'
+    text_size: self.size
+    halign:'left'
+    valign:'middle'
+
+ScreenManagement:
+    MainScreen:
+    OptionScreen:
+    VoiceOptionScreen:
+    NotifyOptionScreen:
+    PresetOptionScreen:
+
+<MainScreen>
+    name: 'main'
+
+    BoxLayout:
+        orientation:'vertical'
+
+        Up_bar:
+            size_hint: (1, 0.1)
+            canvas.before:
+                Color:
+                    rgba: 204/255, 204/255, 204/255, 1
+
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+        DialogList:
+            viewclass: 'DialogLabel'
+
+            RecycleBoxLayout:
+                default_size: None, dp(56)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+
+        Under_bar:
+            size_hint: (1, 0.1)
+            canvas.before:
+                Color:
+                    rgba: 204/255, 204/255, 204/255, 1
+
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+
+<OptionScreen>
+    name: 'option'
+
+    OptionLayout:
+        cols: 1
+        rows: 6
+        spacing: 20
+        padding: 50
+
+
+<OptionLayout>
+    Label:
+        font_size: 40
+        font_name: './source/NanumBarunpenB.ttf'
+        text: '설정'
+
+    Button:
+        font_size: 25
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '음성 설정'
+        on_release: app.root.current = 'voice'
+
+    Button:
+        font_size: 25
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '알림 설정'
+        on_release: app.root.current = 'notify'
+
+    Button:
+        font_size: 25
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '대화 자동완성 설정'
+        on_release: app.root.current = 'preset'
+
+    Button:
+        font_size: 25
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '메인화면으로 돌아가기'
+        on_release: app.root.current = 'main'
+
+    Label:
+        text: ''
+
+
+<VoiceOptionScreen>
+    name: 'voice'
+    GridLayout:
+        cols: 1
+        rows: 4
+        padding: 40
+        spacing: 20
+
+        Label:
+            size_hint: 1, 0.5
+            font_size: 40
+            font_name: './source/NanumBarunpenB.ttf'
+            text: '음성 설정'
+
+        Label:
+            size_hint: 1, 0.4
+            font_size: 20
+            font_name: './source/NanumBarunpenR.ttf'
+            text: '적은 텍스트를 대신 말해줄 목소리를 고르세요'
+
+        VoiceLayout:
+            cols: 2
+            rows: 4
+            spacing: 30
+
+        Button:
+            size_hint: 1, 0.4
+            font_size: 25
+            font_name: './source/NanumBarunpenR.ttf'
+            text: '설정화면으로 돌아가기'
+            on_release: app.root.current = 'option'
+
+<VoiceLayout>
+    Label:
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '차분한 남성 목소리'
+
+    CheckBox:
+        group: 'voice'
+        on_active: root.checkbox_clicked(self, self.active, "ko-KR-Standard-C")
+
+    Label:
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '밝은 남성 목소리'
+
+    CheckBox:
+        group: 'voice'
+        on_active: root.checkbox_clicked(self, self.active, "ko-KR-Standard-D")
+
+    Label:
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '차분한 여성 목소리'
+
+    CheckBox:
+        group: 'voice'
+        on_active: root.checkbox_clicked(self, self.active, "ko-KR-Standard-B")
+
+    Label:
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '밝은 여성 목소리'
+
+    CheckBox:
+        group: 'voice'
+        on_active: root.checkbox_clicked(self, self.active, "ko-KR-Standard-A")
+
+
+<NotifyOptionScreen>
+    name: 'notify'
+
+    GridLayout:
+        cols: 1
+        rows: 4
+        padding: 50
+        spacing: 10
+
+        Label:
+            size_hint: 1, 0.5
+            font_size: 40
+            font_name: './source/NanumBarunpenB.ttf'
+            text: '알림 설정'
+
+        Label:
+            size_hint: 1, 0.3
+            font_size: 20
+            font_name: './source/NanumBarunpenR.ttf'
+            text: '자신이 자주 불리는 별명이나 이름을 적어주세요'
+
+        NotifyLayout:
+            cols: 2
+            rows: 4
+            padding: 10
+            spacing: 30
+
+        Label:
+            size_hint: 1, 0.5
+            text: ' '
+
+<NotifyLayout>
+    Label:
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '별명 1'
+
+    TextInput:
+        id: nickname1
+        font_size: 25
+        font_name: './source/NanumBarunpenR.ttf'
+        multiline: False
+
+    Label:
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '별명 2'
+
+    TextInput:
+        id: nickname2
+        font_size: 25
+        font_name: './source/NanumBarunpenR.ttf'
+        multiline: False
+
+    Label:
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '별명 3'
+
+    TextInput:
+        id: nickname3
+        font_size: 25
+        font_name: './source/NanumBarunpenR.ttf'
+        multiline: False
+
+    Button:
+        id: submit
+        font_size: 30
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '저장'
+        on_release: root.save_called(root, app)
+
+    Button:
+        id: submit
+        font_size: 30
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '취소'
+        on_release: app.root.current = 'option'
+
+
+<PresetOptionScreen>
+    name: 'preset'
+
+    GridLayout:
+        cols: 1
+        rows: 4
+        padding: 40
+        spacing: 10
+
+        Label:
+            size_hint: 1, 0.2
+            font_size: 40
+            font_name: './source/NanumBarunpenB.ttf'
+            text: '대화 프리셋 설정'
+
+        Label:
+            size_hint: 1, 0.2
+            font_size: 20
+            font_name: './source/NanumBarunpenR.ttf'
+            text: '자주 사용하는 문장을 적어주세요. 15글자까지 적을 수 있습니다.'
+
+        PresetLayout:
+            cols: 2
+            rows: 6
+            spacing: 20
+
+<PresetLayout>
+    Label:
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '프리셋 1'
+        size_hint_x: None
+        size_hint_y: None
+        width: root.width/5
+        height: 40
+
+    TextInput:
+        id: preset1
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        multiline: False
+        input_filter: lambda text, from_undo: text[:15 - len(self.text)]
+        size_hint_x: None
+        width: root.width*3/5
+        size_hint_y: None
+        height: 40
+
+    Label:
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '프리셋 2'
+        size_hint_x: None
+        size_hint_y: None
+        width: root.width/5
+        height: 40
+
+    TextInput:
+        id: preset2
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        multiline: False
+        input_filter: lambda text, from_undo: text[:15 - len(self.text)]
+        size_hint_x: None
+        width: root.width*3/5
+        size_hint_y: None
+        height: 40
+
+    Label:
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '프리셋 3'
+        size_hint_x: None
+        size_hint_y: None
+        width: root.width/5
+        height: 40
+
+    TextInput:
+        id: preset3
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        multiline: False
+        input_filter: lambda text, from_undo: text[:15 - len(self.text)]
+        size_hint_x: None
+        width: root.width*3/5
+        size_hint_y: None
+        height: 40
+
+    Label:
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '프리셋 4'
+        size_hint_x: None
+        size_hint_y: None
+        width: root.width/5
+        height: 40
+
+    TextInput:
+        id: preset4
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        multiline: False
+        input_filter: lambda text, from_undo: text[:15 - len(self.text)]
+        size_hint_x: None
+        width: root.width*3/5
+        size_hint_y: None
+        height: 40
+
+    Label:
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '프리셋 5'
+        size_hint_x: None
+        size_hint_y: None
+        width: root.width/5
+        height: 40
+
+    TextInput:
+        id: preset5
+        font_size: 20
+        font_name: './source/NanumBarunpenR.ttf'
+        multiline: False
+        input_filter: lambda text, from_undo: text[:15 - len(self.text)]
+        size_hint_x: None
+        width: root.width*3/5
+        size_hint_y: None
+        height: 40
+
+    Button:
+        id: submit
+        font_size: 30
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '저장'
+        on_release: root.save_preset(root, app)
+        size_hint_x: None
+        width: root.width*2/5
+        size_hint_y: None
+        height: 40
+
+    Button:
+        id: cancel
+        font_size: 30
+        font_name: './source/NanumBarunpenR.ttf'
+        text: '취소'
+        on_release: app.root.current = 'option'
+        size_hint_x: None
+        width: root.width*2/5
+        size_hint_y: None
+        height: 40
+
+
+# 메뉴 및 도움말 버튼 담는 레이아웃
+<Up_bar>
+    BoxLayout:
+        padding: 10
+        RoundedButton:
+            size_hint: (0.2, 1)
+            pos_hint: {'left':1}
+            on_release: app.root.current = 'option'
+            Image:
+                center: self.parent.center
+                source: './source/option_48.png'
+
+        Switch:
+            id: switch
+            on_active: root.switch_callback(self, self.active)
+
+        RoundedButton:
+            size_hint: (0.2, 1)
+            text: '?'
+            font_size: '30pt'
+            on_press: Factory.AboutPop().open()
+            pos_hint: {'right' : 1}
+
+# 말하기 기능 레이아웃
+<Under_bar>
+    BoxLayout:
+        spacing: 20
+        padding: 10
+        RoundedButton:
+            size_hint: (0.2, 1)
+            pos_hint: {'left':1}
+            on_press: app.saveid(root)
+
+            Image:
+                center: self.parent.center
+                source: './source/talk_48.png'
+
+        TextInput:
+            id: textinput
+            multiline: False
+            font_name: './source/NanumBarunpenR.ttf'
+            size_hint: (0.5, 1)
+            font_size: '25pt'
+
+        RoundedButton:
+            id: talkButton
+            size_hint: (0.2, 1)
+            text: 'talk'
+            font_size: '20pt'
+            on_press: app.talkButton_clicked(root)
+            pos_hint: {'right' : 1}
+
+# 둥근 버튼 모양 구현
+<RoundedButton@Button>
+    background_color: 0,0,0,0
+    background_normal: ''
+    canvas.before:
+        Color :
+            rgba: 153/255, 153/255, 153/255, 1
+
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [10]
+
+# 도움말 버튼 구현
+<AboutPop@Popup>
+    title: 'How to use'
+    size_hint: 0.9, 0.9
+    auto_dismiss: True
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            size_hint_y: 0.8
+            Image:
+                id: image
+                size_hint: None, None
+                size: self.parent.width, self.parent.height
+                center_x: self.parent.center_x*4/11
+                center_y: self.parent.center_y
+                allow_stretch: True
+                keep_ratio: False
+                source: './source/guide0.png'
+                on_touch_down: root.next_image()
+
+        Label:
+            id: guide
+            size_hint_y: 0.1
+            font_size: 18
+            font_name: './source/NanumBarunpenR.ttf'
+            text: '사진을 클릭하시면 다음 설명으로 넘어갑니다.'
+
+        Button:
+            text: 'Close'
+            on_press: root.dismiss()
+            size_hint_y: 0.1
+
+<PresetPop@Popup>
+    title: 'Preset'
+    size_hint: 0.7, 0.7
+    auto_dismiss: True
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 15
+        spacing: 10
+        Button:
+            id: preset1
+            text: ''
+            font_name: './source/NanumBarunpenR.ttf'
+            on_press: app.presetButton_clicked(root, 1)
+
+        Button:
+            id: preset2
+            text: ''
+            font_name: './source/NanumBarunpenR.ttf'
+            on_press: app.presetButton_clicked(root, 2)
+
+        Button:
+            id: preset3
+            text: ''
+            font_name: './source/NanumBarunpenR.ttf'
+            on_press: app.presetButton_clicked(root, 3)
+
+        Button:
+            id: preset4
+            text: ''
+            font_name: './source/NanumBarunpenR.ttf'
+            on_press: app.presetButton_clicked(root, 4)
+
+        Button:
+            id: preset5
+            text: ''
+            font_name: './source/NanumBarunpenR.ttf'
+            on_press: app.presetButton_clicked(root, 5)
+
+        Button:
+            text: 'Close'
+            on_press: root.dismiss()
+            size_hint_y: None
+            height: '40dp'
