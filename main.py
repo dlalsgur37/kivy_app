@@ -32,7 +32,7 @@ import math
 kivy.require('2.0.0')
 
 # Google Cloud Speech API KEY 파일 환경변수로 저장
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'bubbly-tractor-314909-3d095fac4a6e.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = ''# your google cloud speech API KEY File
 
 # 기존 옵션 불러오기
 with open('setting.json', 'r', encoding='utf-8') as f:
